@@ -31,6 +31,15 @@ syncfusion_flutter_charts: ^22.2.12
 syncfusion_flutter_gauges: ^22.2.12
 syncfusion_flutter_maps: ^22.2.12
 License
+
+<img width="1354" alt="image" src="https://github.com/Sarthak-source/flutter-web-dashboard/assets/60281442/6bda0c22-96cf-42f9-83f1-e6af9a48f7a6">
+<img width="1392" alt="image" src="https://github.com/Sarthak-source/flutter-web-dashboard/assets/60281442/85ec0422-6ba5-4ed8-b5cf-835b9d7a2461">
+<img width="1396" alt="image" src="https://github.com/Sarthak-source/flutter-web-dashboard/assets/60281442/fbd888f0-9821-41c8-b793-ec11b593397b">
+<img width="1440" alt="image" src="https://github.com/Sarthak-source/flutter-web-dashboard/assets/60281442/acea8cc3-72ca-4adb-bd3b-f5905459a1cc">
+
+
+
+
 This project is licensed under the MIT License - see the LICENSE file for details.
 
 vbnet

@@ -1,7 +1,3 @@
-Here's a basic README.md template you can use for your Flutter project:
-
-markdown
-Copy code
 # Web Dashboard Example
 
 A Flutter project for creating a web dashboard.

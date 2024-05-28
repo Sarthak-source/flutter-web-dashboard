@@ -4,10 +4,10 @@ class DatePickerWidget extends StatefulWidget {
   const DatePickerWidget({super.key});
 
   @override
-  _DatePickerWidgetState createState() => _DatePickerWidgetState();
+  DatePickerWidgetState createState() => DatePickerWidgetState();
 }
 
-class _DatePickerWidgetState extends State<DatePickerWidget> {
+class DatePickerWidgetState extends State<DatePickerWidget> {
   DateTime selectedDate = DateTime.now();
 
   Future<void> _selectDate(BuildContext context) async {

@@ -275,11 +275,23 @@ class DashboardScreenState extends State<DashboardScreen> {
                               : constraints.maxWidth > 600
                                   ? 2
                                   : 1;
+
+                      double aspectRatio = constraints.maxWidth > 1400
+                          ? 2.5
+                          : constraints.maxWidth > 1200
+                              ? 2.15
+                              : constraints.maxWidth > 1000
+                                  ? 1.95
+                                  : constraints.maxWidth > 800
+                                      ? 1.45
+                                      : constraints.maxWidth > 600
+                                          ? 1.55
+                                          : 3;
                       return GridView.count(
                         crossAxisCount: columns,
                         crossAxisSpacing: 16.0,
                         mainAxisSpacing: 16.0,
-                        childAspectRatio: 2.5,
+                        childAspectRatio: aspectRatio,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: const <Widget>[
@@ -336,15 +348,34 @@ class DashboardScreenState extends State<DashboardScreen> {
                           : constraints.maxWidth > 600
                               ? 2
                               : 1;
+
+                      double aspectRatio = constraints.maxWidth > 1400
+                          ? 1.5
+                          : constraints.maxWidth > 1200
+                              ? 1.15
+                              : constraints.maxWidth > 1000
+                                  ? 0.95
+                                  : constraints.maxWidth > 800
+                                      ? 0.75
+                                      : constraints.maxWidth > 600
+                                          ? 0.55
+                                          : 0.78;
+
+                      double fontSize = constraints.maxWidth > 1200
+                          ? 16
+                          : constraints.maxWidth > 600
+                              ? 12
+                              : 12;
+
                       return GridView.count(
                         crossAxisCount: columns,
                         crossAxisSpacing: 16.0,
                         mainAxisSpacing: 16.0,
-                        childAspectRatio: 1.2,
+                        childAspectRatio: aspectRatio,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
-                        children: const <Widget>[
-                          Card(
+                        children:  <Widget>[
+                          const Card(
                               child: Column(
                             children: [
                               Padding(
@@ -393,8 +424,7 @@ class DashboardScreenState extends State<DashboardScreen> {
                           Card(
                             child: Column(
                               children: [
-                               
-                                Padding(
+                                const Padding(
                                   padding: EdgeInsets.all(20.0),
                                   child: Row(
                                     children: [
@@ -409,10 +439,13 @@ class DashboardScreenState extends State<DashboardScreen> {
                                     ],
                                   ),
                                 ),
-                                 Spacer(flex: 1,),
+                                const Spacer(
+                                  flex: 1,
+                                ),
                                 Card(
                                   child: Padding(
-                                    padding: EdgeInsets.symmetric(horizontal: 20,vertical: 40),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 40),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -424,13 +457,15 @@ class DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               'Current Week',
                                               style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: fontSize,
+                                                  color: Colors.grey,
                                                   fontWeight: FontWeight.bold),
                                             ),
-                                            Text(
+                                            const SizedBox(height: 5,),
+                                             Text(
                                               '\$1705.54',
                                               style: TextStyle(
-                                                  fontSize: 24,
+                                                  fontSize: fontSize+4,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],
@@ -442,13 +477,15 @@ class DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               'Previous Week',
                                               style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: fontSize,
+                                                  color: Colors.grey,
                                                   fontWeight: FontWeight.bold),
                                             ),
+                                             const SizedBox(height: 5,),
                                             Text(
                                               '\$6,523.25',
                                               style: TextStyle(
-                                                  fontSize: 24,
+                                                  fontSize: fontSize+4,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],
@@ -460,13 +497,15 @@ class DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               'Conversation',
                                               style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: fontSize,
+                                                  color: Colors.grey,
                                                   fontWeight: FontWeight.bold),
                                             ),
+                                             const SizedBox(height: 5,),
                                             Text(
                                               '8.27%',
                                               style: TextStyle(
-                                                  fontSize: 24,
+                                                  fontSize: fontSize+4,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],
@@ -478,13 +517,15 @@ class DashboardScreenState extends State<DashboardScreen> {
                                             Text(
                                               'Customers',
                                               style: TextStyle(
-                                                  fontSize: 12,
+                                                  fontSize: fontSize,
+                                                  color: Colors.grey,
                                                   fontWeight: FontWeight.bold),
                                             ),
+                                             const SizedBox(height: 5,),
                                             Text(
                                               '69k',
                                               style: TextStyle(
-                                                  fontSize: 24,
+                                                  fontSize: fontSize+4,
                                                   fontWeight: FontWeight.bold),
                                             ),
                                           ],
@@ -493,8 +534,10 @@ class DashboardScreenState extends State<DashboardScreen> {
                                     ),
                                   ),
                                 ),
-                                Spacer(flex: 1,),
-                                LineBarChart(),
+                                const Spacer(
+                                  flex: 1,
+                                ),
+                                const LineBarChart(),
                               ],
                             ),
                           ),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -11,6 +13,12 @@ class RadialGraph extends StatefulWidget {
 class _RadialGraphState extends State<RadialGraph> {
   @override
   Widget build(BuildContext context) {
+    var i = context.describeWidget('RadialGraph');
+
+    if (!context.mounted) {}
+
+    log(i.name!);
+
     return SfRadialGauge(
       enableLoadingAnimation: true,
       axes: <RadialAxis>[

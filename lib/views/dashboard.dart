@@ -1,14 +1,11 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:web_dashboard_example/component/dashboard_card.dart';
-import 'package:web_dashboard_example/component/data_table.dart';
 import 'package:web_dashboard_example/component/date_picker.dart';
-import 'package:web_dashboard_example/component/horizontal_bar_chart.dart';
-import 'package:web_dashboard_example/component/line_bar_chart.dart';
-import 'package:web_dashboard_example/component/map_chart.dart';
-import 'package:web_dashboard_example/component/progress_bar.dart';
-import 'package:web_dashboard_example/component/radial_graph.dart';
+import 'package:web_dashboard_example/component/responsive_info_grid.dart';
+import 'package:web_dashboard_example/component/responsive_radial.dart';
+import 'package:web_dashboard_example/component/responsive_table_one.dart';
+import 'package:web_dashboard_example/component/resposive_lower_table.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -29,6 +26,8 @@ class DashboardScreenState extends State<DashboardScreen> {
       lastDate: DateTime(2101),
     );
     if (picked != null && picked != selectedDate) {
+      log('message');
+
       setState(() {
         selectedDate = picked;
       });
@@ -37,6 +36,10 @@ class DashboardScreenState extends State<DashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+
+    log(width.toString());
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('JIDOX'),
@@ -249,14 +252,14 @@ class DashboardScreenState extends State<DashboardScreen> {
               ),
             ),
           ),
-          Expanded(
+          const Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
-                  const Row(
+                  Row(
                     children: [
                       Text('Dashboard',
                           style: TextStyle(
@@ -265,459 +268,12 @@ class DashboardScreenState extends State<DashboardScreen> {
                       DatePickerWidget(),
                     ],
                   ),
-                  const SizedBox(height: 16.0),
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      int columns = constraints.maxWidth > 1200
-                          ? 4
-                          : constraints.maxWidth > 800
-                              ? 3
-                              : constraints.maxWidth > 600
-                                  ? 2
-                                  : 1;
-
-                      double aspectRatio = constraints.maxWidth > 1400
-                          ? 2.5
-                          : constraints.maxWidth > 1200
-                              ? 2.15
-                              : constraints.maxWidth > 1000
-                                  ? 1.95
-                                  : constraints.maxWidth > 800
-                                      ? 1.45
-                                      : constraints.maxWidth > 600
-                                          ? 1.55
-                                          : 3;
-                      return GridView.count(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        childAspectRatio: aspectRatio,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: const <Widget>[
-                          DashboardCard(
-                            title: 'CUSTOMERS',
-                            value: '54,214',
-                            icon: Icons.people,
-                            change: '+2,541',
-                            changeType: 'positive',
-                            backgroundColor: Colors.blue,
-                          ),
-                          DashboardCard(
-                            title: 'ORDERS',
-                            value: '7,543',
-                            icon: Icons.shopping_cart,
-                            change: '-1.08%',
-                            changeType: 'negative',
-                            backgroundColor: Colors.orange,
-                          ),
-                          DashboardCard(
-                            title: 'REVENUE',
-                            value: '\$9,254',
-                            icon: Icons.attach_money,
-                            change: '-7.00%',
-                            changeType: 'negative',
-                            backgroundColor: Colors.red,
-                          ),
-                          DashboardCard(
-                            title: 'CONVERSATION',
-                            value: '9.62%',
-                            icon: Icons.chat,
-                            change: '+3.07%',
-                            changeType: 'positive',
-                            backgroundColor: Colors.green,
-                          ),
-                          DashboardCard(
-                            title: 'BALANCE',
-                            value: '\$168.5k',
-                            icon: Icons.account_balance_wallet,
-                            change: '+18.34%',
-                            changeType: 'positive',
-                            backgroundColor: Colors.purple,
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 16.0),
-
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      int columns = constraints.maxWidth > 1200
-                          ? 2
-                          : constraints.maxWidth > 600
-                              ? 2
-                              : 1;
-
-                      double aspectRatio = constraints.maxWidth > 1400
-                          ? 1.5
-                          : constraints.maxWidth > 1200
-                              ? 1.15
-                              : constraints.maxWidth > 1000
-                                  ? 0.95
-                                  : constraints.maxWidth > 800
-                                      ? 0.75
-                                      : constraints.maxWidth > 600
-                                          ? 0.55
-                                          : 0.78;
-
-                      double fontSize = constraints.maxWidth > 1200
-                          ? 16
-                          : constraints.maxWidth > 600
-                              ? 12
-                              : 12;
-
-                      return GridView.count(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        childAspectRatio: aspectRatio,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children:  <Widget>[
-                          const Card(
-                              child: Column(
-                            children: [
-                              Padding(
-                                padding: EdgeInsets.all(20.0),
-                                child: Row(
-                                  children: [
-                                    Text(
-                                      'Total sales',
-                                      style: TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Spacer(),
-                                  ],
-                                ),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: RadialGraph(),
-                              ),
-                              Expanded(
-                                flex: 5,
-                                child: Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 15),
-                                  child: Column(
-                                    children: [
-                                      ProgressBar(
-                                        city: 'Brooklyn, New York',
-                                        population: 72000,
-                                      ),
-                                      ProgressBar(
-                                        city: 'The Castro, San Francisco',
-                                        population: 39000,
-                                      ),
-                                      ProgressBar(
-                                        city: 'Kovan, Singapore',
-                                        population: 61000,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
-                          Card(
-                            child: Column(
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(20.0),
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        'Revenue',
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                      Spacer(),
-                                    ],
-                                  ),
-                                ),
-                                const Spacer(
-                                  flex: 1,
-                                ),
-                                Card(
-                                  child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 20, vertical: 40),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Current Week',
-                                              style: TextStyle(
-                                                  fontSize: fontSize,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            const SizedBox(height: 5,),
-                                             Text(
-                                              '\$1705.54',
-                                              style: TextStyle(
-                                                  fontSize: fontSize+4,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Previous Week',
-                                              style: TextStyle(
-                                                  fontSize: fontSize,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                             const SizedBox(height: 5,),
-                                            Text(
-                                              '\$6,523.25',
-                                              style: TextStyle(
-                                                  fontSize: fontSize+4,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Conversation',
-                                              style: TextStyle(
-                                                  fontSize: fontSize,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                             const SizedBox(height: 5,),
-                                            Text(
-                                              '8.27%',
-                                              style: TextStyle(
-                                                  fontSize: fontSize+4,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Customers',
-                                              style: TextStyle(
-                                                  fontSize: fontSize,
-                                                  color: Colors.grey,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                             const SizedBox(height: 5,),
-                                            Text(
-                                              '69k',
-                                              style: TextStyle(
-                                                  fontSize: fontSize+4,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                const Spacer(
-                                  flex: 1,
-                                ),
-                                const LineBarChart(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      int columns = constraints.maxWidth > 1200
-                          ? 2
-                          : constraints.maxWidth > 600
-                              ? 2
-                              : 1;
-                      return GridView.count(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        childAspectRatio: 1.5,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: const <Widget>[
-                          Card(
-                            child: Padding(
-                              padding: EdgeInsets.all(16.0),
-                              child: Row(
-                                children: [
-                                  Expanded(flex: 3, child: MapChart()),
-                                  Expanded(flex: 2, child: BarCustomization()),
-                                ],
-                              ),
-                            ),
-                          ),
-                          Card(
-                            child: DataTableWidget(
-                              title: 'Top Selling Products',
-                              data: [
-                                {
-                                  'label': 'Direct',
-                                  'value': 2050,
-                                  'progress': 0.8
-                                },
-                                {
-                                  'label': 'Organic Search',
-                                  'value': 1405,
-                                  'progress': 0.6
-                                },
-                                {
-                                  'label': 'Referral',
-                                  'value': 750,
-                                  'progress': 0.4
-                                },
-                                {
-                                  'label': 'Social',
-                                  'value': 540,
-                                  'progress': 0.3
-                                },
-                                {
-                                  'label': 'Other',
-                                  'value': 8965,
-                                  'progress': 1.0
-                                },
-                              ],
-                            ),
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-
-                  LayoutBuilder(
-                    builder: (context, constraints) {
-                      int columns = constraints.maxWidth > 1200
-                          ? 3
-                          : constraints.maxWidth > 600
-                              ? 2
-                              : 1;
-                      return GridView.count(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 16.0,
-                        mainAxisSpacing: 16.0,
-                        childAspectRatio: 1.05,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: const <Widget>[
-                          DataTableWidget(
-                            title: 'Channels',
-                            data: [
-                              {
-                                'label': 'Direct',
-                                'value': 2050,
-                                'progress': 0.5
-                              },
-                              {
-                                'label': 'Organic Search',
-                                'value': 1405,
-                                'progress': 0.35
-                              },
-                              {
-                                'label': 'Referral',
-                                'value': 750,
-                                'progress': 0.18
-                              },
-                              {
-                                'label': 'Social',
-                                'value': 540,
-                                'progress': 0.12
-                              },
-                              {
-                                'label': 'Other',
-                                'value': 8965,
-                                'progress': 0.98
-                              },
-                            ],
-                          ),
-                          DataTableWidget(
-                            title: 'Social Media Traffic',
-                            data: [
-                              {
-                                'label': 'Facebook',
-                                'value': 2250,
-                                'progress': 0.5
-                              },
-                              {
-                                'label': 'Instagram',
-                                'value': 1501,
-                                'progress': 0.35
-                              },
-                              {
-                                'label': 'Twitter',
-                                'value': 750,
-                                'progress': 0.18
-                              },
-                              {
-                                'label': 'LinkedIn',
-                                'value': 540,
-                                'progress': 0.12
-                              },
-                              {
-                                'label': 'Other',
-                                'value': 13851,
-                                'progress': 0.98
-                              },
-                            ],
-                          ),
-                          DataTableWidget(
-                            title: 'Engagement Overview',
-                            data: [
-                              {'label': '0-30', 'value': 2250, 'progress': 0.5},
-                              {
-                                'label': '31-60',
-                                'value': 1501,
-                                'progress': 0.35
-                              },
-                              {
-                                'label': '61-120',
-                                'value': 750,
-                                'progress': 0.18
-                              },
-                              {
-                                'label': '121-240',
-                                'value': 540,
-                                'progress': 0.12
-                              },
-                              {
-                                'label': '141-420',
-                                'value': 56,
-                                'progress': 0.01
-                              },
-                            ],
-                          ),
-                        ],
-                      );
-                    },
-                  ),
-
-                  // Get the height of the layout
-
-                  // Add more widgets for Total Sales, Revenue, etc.
+                  SizedBox(height: 16.0),
+                  TopResponsiveGrid(),
+                  SizedBox(height: 16.0),
+                  MiddleResponsiveSecondGrid(),
+                  MyResponsiveLayout(),
+                  MyResponsiveLayoutLower(),
                 ],
               ),
             ),
